@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KORE - Market Analysis for SMEs</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        /* NAVBAR */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 50px;
+            background: #fff;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: 700;
+            color: #2563eb;
+            letter-spacing: 2px;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #2563eb;
+        }
+
+        .nav-cta {
+            background: #2563eb;
+            color: white !important;
+            padding: 10px 20px;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+
+        .nav-cta:hover {
+            background: #1e40af;
+        }
+
+        /* HERO SECTION */
+        .hero {
+            background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
+            color: white;
+            padding: 100px 50px;
+            text-align: center;
+            min-height: 600px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .hero h1 {
+            font-size: 56px;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .hero p {
+            font-size: 22px;
+            margin-bottom: 30px;
+            opacity: 0.95;
+            max-width: 700px;
+        }
+
+        .cta-button {
+            background: #fff;
+            color: #2563eb;
+            padding: 15px 40px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+            display: inline-block;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+
+        /* PROBLEMA */
+        .problem {
+            padding: 80px 50px;
+            background: #f9fafb;
+            text-align: center;
+        }
+
+        .problem h2 {
+            font-size: 42px;
+            margin-bottom: 30px;
+            color: #1f2937;
+        }
+
+        .problem-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 30px;
+            margin-top: 40px;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .problem-card {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            transition: transform 0.3s;
+        }
+
+        .problem-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .problem-card h3 {
+            color: #dc2626;
+            margin-bottom: 15px;
+            font-size: 20px;
+        }
+
+        .problem-card p {
+            color: #666;
+            line-height: 1.8;
+        }
+
+        /* SOLUCIÓN */
+        .solution {
+            padding: 80px 50px;
+            background: white;
+            text-align: center;
+        }
+
+        .solution h2 {
+            font-size: 42px;
+            margin-bottom: 20px;
+            color: #1f2937;
+        }
+
+        .solution-subtitle {
+            font-size: 18px;
+            color: #666;
+            margin-bottom: 50px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            max-width: 1000px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .feature {
+            text-align: left;
+            padding: 30px;
+            background: #f9fafb;
+            border-radius: 8px;
+        }
+
+        .feature-icon {
+            font-size: 36px;
+            margin-bottom: 15px;
+        }
+
+        .feature h3 {
+            color: #2563eb;
+            margin-bottom: 10px;
+            font-size: 20px;
+        }
+
+        .feature p {
+            color: #666;
+            line-height: 1.8;
+        }
+
+        /* CASOS DE USO */
+        .cases {
+            padding: 80px 50px;
+            background: #f9fafb;
+            text-align: center;
+        }
+
+        .cases h2 {
+            font-size: 42px;
+            margin-bottom: 50px;
+            color: #1f2937;
+        }
+
+        .case-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            max-width: 1000px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .case-card {
+            background: white;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            text-align: left;
+            border-left: 4px solid #2563eb;
+        }
+
+        .case-card h3 {
+            color: #1f2937;
+            margin-bottom: 15px;
+        }
+
+        .case-card .result {
+            color: #059669;
+            font-weight: 600;
+            margin-top: 15px;
+            font-size: 18px;
+        }
+
+        /* PRICING */
+        .pricing {
+            padding: 80px 50px;
+            background: white;
+            text-align: center;
+        }
+
+        .pricing h2 {
+            font-size: 42px;
+            margin-bottom: 50px;
+            color: #1f2937;
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 30px;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .pricing-card {
+            background: #f9fafb;
+            padding: 40px;
+            border-radius: 8px;
+            border: 2px solid #e5e7eb;
+            transition: all 0.3s;
+        }
+
+        .pricing-card:hover {
+            border-color: #2563eb;
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(37, 99, 235, 0.2);
+        }
+
+        .pricing-card.featured {
+            background: #2563eb;
+            color: white;
+            border-color: #2563eb;
+            transform: scale(1.05);
+        }
+
+        .pricing-card h3 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: inherit;
+        }
+
+        .price {
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: inherit;
+        }
+
+        .price-period {
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 14px;
+        }
+
+        .pricing-card.featured .price-period {
+            color: #dbeafe;
+        }
+
+        .pricing-features {
+            list-style: none;
+            text-align: left;
+            margin-bottom: 30px;
+        }
+
+        .pricing-features li {
+            padding: 12px 0;
+            border-bottom: 1px solid #e5e7eb;
+            color: #666;
+        }
+
+        .pricing-card.featured .pricing-features li {
+            border-bottom-color: #1e40af;
+            color: #f0f9ff;
+        }
+
+        .pricing-features li:before {
+            content: "✓ ";
+            color: #059669;
+            font-weight: 700;
+            margin-right: 10px;
+        }
+
+        .pricing-card.featured .pricing-features li:before {
+            color: #fbbf24;
+        }
+
+        .pricing-btn {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .pricing-card .pricing-btn {
+            background: white;
+            color: #2563eb;
+            border: 2px solid #2563eb;
+        }
+
+        .pricing-card .pricing-btn:hover {
+            background: #2563eb;
+            color: white;
+        }
+
+        .pricing-card.featured .pricing-btn {
+            background: #fbbf24;
+            color: #1f2937;
+            border: none;
+        }
+
+        .pricing-card.featured .pricing-btn:hover {
+            background: #f59e0b;
+        }
+
+        /* CTA FINAL */
+        .cta-final {
+            padding: 80px 50px;
+            background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
+            color: white;
+            text-align: center;
+        }
+
+        .cta-final h2 {
+            font-size: 42px;
+            margin-bottom: 20px;
+        }
+
+        .cta-final p {
+            font-size: 18px;
+            margin-bottom: 30px;
+            opacity: 0.95;
+        }
+
+        /* FOOTER */
+        footer {
+            background: #1f2937;
+            color: white;
+            padding: 40px 50px;
+            text-align: center;
+        }
+
+        footer p {
+            margin-bottom: 10px;
+        }
+
+        .footer-links {
+            margin-top: 20px;
+        }
+
+        .footer-links a {
+            color: #dbeafe;
+            text-decoration: none;
+            margin: 0 15px;
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            nav {
+                padding: 15px 20px;
+            }
+
+            nav ul {
+                gap: 15px;
+            }
+
+            .hero h1 {
+                font-size: 36px;
+            }
+
+            .hero p {
+                font-size: 18px;
+            }
+
+            .problem-grid, .pricing-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .features, .case-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .pricing-card.featured {
+                transform: scale(1);
+            }
+
+            .problem h2, .solution h2, .cases h2, .pricing h2, .cta-final h2 {
+                font-size: 32px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAVBAR -->
+    <nav>
+        <div class="logo">KORE</div>
+        <ul>
+            <li><a href="#solution">Solution</a></li>
+            <li><a href="#pricing">Pricing</a></li>
+            <li><a href="#cases">Cases</a></li>
+            <li><a href="#contact" class="nav-cta">Get Started</a></li>
+        </ul>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero">
+        <h1>Understand Your Market. Grow Your Business.</h1>
+        <p>Professional market analysis for SMEs that actually drive results. Data-driven insights without the enterprise price tag.</p>
+        <button class="cta-button" onclick="scrollToContact()">Start Your Free Audit →</button>
+    </section>
+
+    <!-- PROBLEMA -->
+    <section class="problem">
+        <h2>The Problem Most SMEs Face</h2>
+        <div class="problem-grid">
+            <div class="problem-card">
+                <h3>❌ Guessing Game</h3>
+                <p>Making decisions without real market data. Your competitors are leaving you behind.</p>
+            </div>
+            <div class="problem-card">
+                <h3>❌ Wrong Timing</h3>
+                <p>Launching products or services that don't match market demand. Wasted resources.</p>
+            </div>
+            <div class="problem-card">
+                <h3>❌ High Costs</h3>
+                <p>Enterprise consulting firms charge $10K+. You need answers NOW, not next quarter.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- SOLUCIÓN -->
+    <section class="solution" id="solution">
+        <h2>How KORE Works</h2>
+        <p class="solution-subtitle">We deliver actionable market insights in days, not months. 100% online, tailored to your industry.</p>
+        
+        <div class="features">
+            <div class="feature">
+                <div class="feature-icon">📊</div>
+                <h3>Market Research</h3>
+                <p>Deep dive into your industry. Competitor analysis, trends, and opportunities identified.</p>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">🎯</div>
+                <h3>Strategic Insights</h3>
+                <p>Clear recommendations. What to do, what to avoid, and where to focus your efforts.</p>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">📈</div>
+                <h3>Action Plan</h3>
+                <p>Step-by-step roadmap. You'll know exactly what to do on day one.</p>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">🚀</div>
+                <h3>Fast Delivery</h3>
+                <p>Quick Audits in 2-3 days. Full Analysis in 2 weeks. No waiting around.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- CASOS DE USO -->
+    <section class="cases" id="cases">
+        <h2>Real Results</h2>
+        <div class="case-grid">
+            <div class="case-card">
+                <h3>🏪 E-commerce Store</h3>
+                <p>"We didn't know which product line to expand. KORE's analysis showed us the untapped segment. We focused there and grew 45% in 6 months."</p>
+                <div class="result">+45% Revenue in 6 months</div>
+            </div>
+            <div class="case-card">
+                <h3>💼 B2B Services</h3>
+                <p>"Our pricing was way off. The market analysis revealed we were undervaluing our service. New pricing improved margins instantly."</p>
+                <div class="result">+30% Profit Margin</div>
+            </div>
+            <div class="case-card">
+                <h3>🍕 Restaurant Chain</h3>
+                <p>"Before opening new locations, we got market data. Saved us from 2 bad decisions and identified 3 golden opportunities."</p>
+                <div class="result">Avoided $200K Loss</div>
+            </div>
+            <div class="case-card">
+                <h3>📱 SaaS Startup</h3>
+                <p>"Market analysis showed our messaging was confusing. We repositioned and conversation rates doubled."</p>
+                <div class="result">2x Conversion Rate</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PRICING -->
+    <section class="pricing" id="pricing">
+        <h2>Simple Pricing</h2>
+        
+        <div class="pricing-grid">
+            <div class="pricing-card">
+                <h3>Quick Audit</h3>
+                <div class="price">$299</div>
+                <div class="price-period">2-3 days</div>
+                <ul class="pricing-features">
+                    <li>Market Overview</li>
+                    <li>Competitor Snapshot</li>
+                    <li>Basic Recommendations</li>
+                    <li>PDF Report</li>
+                </ul>
+                <button class="pricing-btn" onclick="scrollToContact()">Get Started</button>
+            </div>
+
+            <div class="pricing-card featured">
+                <h3>Market Analysis</h3>
+                <div class="price">$1,299</div>
+                <div class="price-period">2 weeks</div>
+                <ul class="pricing-features">
+                    <li>Complete Market Research</li>
+                    <li>Detailed Competitor Analysis</li>
+                    <li>Customer Insights</li>
+                    <li>Strategic Recommendations</li>
+                    <li>Implementation Roadmap</li>
+                    <li>1 Follow-up Call</li>
+                </ul>
+                <button class="pricing-btn" onclick="scrollToContact()">Start Now</button>
+            </div>
+
+            <div class="pricing-card">
+                <h3>Full Strategy</h3>
+                <div class="price">$3,999</div>
+                <div class="price-period">4 weeks</div>
+                <ul class="pricing-features">
+                    <li>Everything in Analysis</li>
+                    <li>Market Positioning Plan</li>
+                    <li>Growth Strategy</li>
+                    <li>Monthly Review Calls</li>
+                    <li>Custom Dashboards</li>
+                    <li>3 Months Support</li>
+                </ul>
+                <button class="pricing-btn" onclick="scrollToContact()">Schedule Call</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA FINAL -->
+    <section class="cta-final" id="contact">
+        <h2>Stop Guessing. Start Growing.</h2>
+        <p>Book your free 30-minute consultation with our team. We'll assess your business and show you exactly how KORE can help.</p>
+        <button class="cta-button" style="background: #fbbf24; color: #1f2937; margin-top: 20px;">Schedule Free Consultation →</button>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <p>&copy; 2024 KORE Analytics. All rights reserved.</p>
+        <div class="footer-links">
+            <a href="#privacy">Privacy Policy</a>
+            <a href="#terms">Terms of Service</a>
+            <a href="#contact">Contact</a>
+        </div>
+    </footer>
+
+    <script>
+        function scrollToContact() {
+            document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
+        }
+    </script>
+
+</body>
+</html>
