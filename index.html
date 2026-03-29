@@ -404,6 +404,46 @@
             text-decoration: underline;
         }
 
+        /* Contact Links Container */
+        .contact-links {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            margin-top: 2rem;
+            align-items: center;
+        }
+
+        .contact-person {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            min-width: 250px;
+        }
+
+        .contact-person strong {
+            display: block;
+            color: #1f2937;
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .contact-person a {
+            display: inline-block;
+            background: #10b981;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .contact-person a:hover {
+            background: #059669;
+            transform: translateY(-2px);
+        }
+
         /* Responsive */
         @media (max-width: 768px) {
             .hero h1 {
@@ -427,6 +467,10 @@
                 padding: 12px 24px;
                 font-size: 0.9rem;
                 margin: 5px;
+            }
+
+            .contact-links {
+                flex-direction: column;
             }
         }
     </style>
@@ -462,10 +506,16 @@
             <a href="https://formspree.io/f/xnjopojk" class="cta-button" style="text-decoration: none; display: inline-block; cursor: pointer;">
                 Start Your Free Audit →
             </a>
-            <a href="https://wa.me/34646282737?text=Hola%20KORE,%20me%20interesa%20una%20auditoría%20de%20mercado" 
-               class="cta-button" style="background: #fbbf24; color: #1f2937; text-decoration: none; display: inline-block; cursor: pointer; margin-top: 20px;">
-                💬 Schedule Free Consultation →
-            </a>
+            <div style="margin-top: 20px;">
+                <a href="https://wa.me/34655593805?text=Hola%20KORE,%20me%20interesa%20una%20auditoría%20de%20mercado%20con%20Rossana" 
+                   class="cta-button" style="background: #10b981; color: white; text-decoration: none; display: inline-block; cursor: pointer; margin-right: 10px;">
+                    💬 Rossana (WhatsApp) →
+                </a>
+                <a href="https://wa.me/34646282737?text=Hola%20KORE,%20me%20interesa%20una%20auditoría%20de%20mercado%20con%20Mariela" 
+                   class="cta-button" style="background: #3b82f6; color: white; text-decoration: none; display: inline-block; cursor: pointer;">
+                    💬 Mariela (WhatsApp) →
+                </a>
+            </div>
         </div>
     </section>
 
@@ -632,11 +682,21 @@
                     <button type="submit">Send Message</button>
                 </form>
             </div>
-            <p style="margin-top: 2rem; color: #6b7280;">
-                Or reach out directly:<br>
-                📧 <a href="mailto:mariela@kore.com">Contact Mariela</a> | 
-                📱 <a href="https://wa.me/34646282737">WhatsApp</a>
-            </p>
+
+            <div class="contact-links">
+                <div class="contact-person">
+                    <strong>📱 Rossana de Rose</strong>
+                    <a href="https://wa.me/34655593805?text=Hola%20Rossana,%20tengo%20una%20pregunta%20sobre%20KORE">
+                        WhatsApp Rossana
+                    </a>
+                </div>
+                <div class="contact-person">
+                    <strong>📱 Mariela Palmieri</strong>
+                    <a href="https://wa.me/34646282737?text=Hola%20Mariela,%20tengo%20una%20pregunta%20sobre%20KORE">
+                        WhatsApp Mariela
+                    </a>
+                </div>
+            </div>
         </div>
     </section>
 
