@@ -18,24 +18,43 @@
             background: #ffffff;
         }
 
-        /* Floating Messages Animation */
-        @keyframes floatIn {
+        /* Floating Messages Animation - Aparecen al costado */
+        @keyframes slideInRight {
             0% {
                 opacity: 0;
-                transform: translateY(20px);
+                transform: translateX(100px);
             }
             10% {
                 opacity: 1;
-                transform: translateY(0);
+                transform: translateX(0);
             }
-            90% {
+            85% {
                 opacity: 1;
-                transform: translateY(0);
+                transform: translateX(0);
             }
             100% {
                 opacity: 0;
-                transform: translateY(-20px);
+                transform: translateX(100px);
             }
+        }
+
+        .floating-message {
+            position: fixed;
+            right: 2rem;
+            top: 50%;
+            transform: translateY(-50%);
+            background: white;
+            padding: 1.5rem 2.5rem;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #8B3A3A;
+            border-left: 4px solid #8B3A3A;
+            animation: slideInRight 4s ease-in-out forwards;
+            pointer-events: none;
+            z-index: 9999;
+            max-width: 300px;
         }
 
         /* Underline Animation - Anthropic Style */
@@ -55,24 +74,6 @@
             background-size: 0% 3px;
             background-repeat: no-repeat;
             animation: slideUnderline 0.8s ease forwards;
-        }
-
-        .floating-message {
-            position: fixed;
-            left: 50%;
-            top: 50%;
-            transform: translate(-50%, -50%);
-            background: white;
-            padding: 1.5rem 2.5rem;
-            border-radius: 12px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
-            font-size: 1.1rem;
-            font-weight: 600;
-            color: #8B3A3A;
-            border-left: 4px solid #8B3A3A;
-            animation: floatIn 4s ease-in-out forwards;
-            pointer-events: none;
-            z-index: 9999;
         }
 
         /* Navigation */
@@ -561,6 +562,55 @@
             transform: translateY(-2px);
         }
 
+        /* Contact Links Container */
+        .contact-links {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            margin-top: 2rem;
+            align-items: center;
+        }
+
+        .contact-person {
+            background: white;
+            padding: 1.8rem;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            min-width: 280px;
+            border: 2px solid transparent;
+            transition: all 0.3s;
+        }
+
+        .contact-person:hover {
+            border-color: #8B3A3A;
+            box-shadow: 0 8px 20px rgba(139, 58, 58, 0.12);
+        }
+
+        .contact-person strong {
+            display: block;
+            color: #1f2937;
+            margin-bottom: 0.8rem;
+            font-size: 1.1rem;
+            font-weight: 700;
+        }
+
+        .contact-person a {
+            display: inline-block;
+            background: #8B3A3A;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .contact-person a:hover {
+            background: #6B2D2D;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 16px rgba(139, 58, 58, 0.2);
+        }
+
         /* Footer */
         footer {
             background: #1f2937;
@@ -605,6 +655,10 @@
                 margin: 5px;
             }
 
+            .contact-links {
+                flex-direction: column;
+            }
+
             .pricing-card.featured {
                 transform: scale(1);
             }
@@ -612,6 +666,8 @@
             .floating-message {
                 font-size: 0.95rem;
                 padding: 1.2rem 1.8rem;
+                right: 1rem;
+                max-width: 250px;
             }
         }
     </style>
@@ -685,8 +741,8 @@
                 const span = document.createElement('span');
                 span.textContent = word + ' ';
                 
-                // Add underline to first meaningful word of each section
-                if (wordIndex === 0 || (index > 0 && wordIndex === 0)) {
+                // Add underline to first word
+                if (wordIndex === 0) {
                     span.className = 'underline-animated';
                 }
                 
@@ -722,6 +778,10 @@
                 <a href="https://wa.me/5493492610684?text=Hi%20KORE,%20I%27m%20interested%20in%20a%20market%20audit." 
                    class="cta-button cta-secondary">
                     💬 WhatsApp Mariela →
+                </a>
+                <a href="https://wa.me/34655593805?text=Hi%20KORE,%20I%27m%20interested%20in%20a%20market%20audit." 
+                   class="cta-button cta-secondary">
+                    💬 WhatsApp Rossana →
                 </a>
             </div>
         </div>
@@ -890,13 +950,28 @@
                     <button type="submit">Send Message</button>
                 </form>
             </div>
+
+            <div class="contact-links">
+                <div class="contact-person">
+                    <strong>📱 Mariela (Argentina)</strong>
+                    <a href="https://wa.me/5493492610684?text=Hi%20KORE,%20I%27m%20interested%20in%20a%20market%20audit.">
+                        WhatsApp Me
+                    </a>
+                </div>
+                <div class="contact-person">
+                    <strong>📱 Rossana (Spain)</strong>
+                    <a href="https://wa.me/34655593805?text=Hi%20KORE,%20I%27m%20interested%20in%20a%20market%20audit.">
+                        WhatsApp Rossana
+                    </a>
+                </div>
+            </div>
         </div>
     </section>
 
     <!-- Footer -->
     <footer>
         <div class="container">
-            <p>&copy; 2024 KORE. Data Solution.</p>
+            <p>&copy; 2024 KORE. Market Analysis for Small Business.</p>
             <p style="margin-top: 1rem; font-size: 0.9rem;">
                 <a href="#">Privacy Policy</a> | 
                 <a href="#">Terms of Service</a>
