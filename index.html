@@ -38,6 +38,25 @@
             }
         }
 
+        /* Underline Animation - Anthropic Style */
+        @keyframes slideUnderline {
+            0% {
+                width: 0;
+            }
+            100% {
+                width: 100%;
+            }
+        }
+
+        .underline-animated {
+            position: relative;
+            display: inline-block;
+            background: linear-gradient(to right, #8B3A3A, #8B3A3A) bottom;
+            background-size: 0% 3px;
+            background-repeat: no-repeat;
+            animation: slideUnderline 0.8s ease forwards;
+        }
+
         .floating-message {
             position: fixed;
             left: 50%;
@@ -219,6 +238,8 @@
             color: #1f2937;
             font-weight: 900;
             letter-spacing: -1px;
+            word-spacing: 100vw;
+            line-height: 1.3;
         }
 
         section h3 {
@@ -226,6 +247,18 @@
             margin-bottom: 1rem;
             color: #1f2937;
             font-weight: 700;
+        }
+
+        /* Scroll reveal effect */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
         }
 
         /* Problem Section */
@@ -546,55 +579,6 @@
             text-decoration: underline;
         }
 
-        /* Contact Links Container */
-        .contact-links {
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
-            margin-top: 2rem;
-            align-items: center;
-        }
-
-        .contact-person {
-            background: white;
-            padding: 1.8rem;
-            border-radius: 12px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-            min-width: 280px;
-            border: 2px solid transparent;
-            transition: all 0.3s;
-        }
-
-        .contact-person:hover {
-            border-color: #8B3A3A;
-            box-shadow: 0 8px 20px rgba(139, 58, 58, 0.12);
-        }
-
-        .contact-person strong {
-            display: block;
-            color: #1f2937;
-            margin-bottom: 0.8rem;
-            font-size: 1.1rem;
-            font-weight: 700;
-        }
-
-        .contact-person a {
-            display: inline-block;
-            background: #8B3A3A;
-            color: white;
-            padding: 12px 24px;
-            border-radius: 6px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s ease;
-        }
-
-        .contact-person a:hover {
-            background: #6B2D2D;
-            transform: translateY(-2px);
-            box-shadow: 0 8px 16px rgba(139, 58, 58, 0.2);
-        }
-
         /* Responsive */
         @media (max-width: 768px) {
             .hero h1 {
@@ -619,10 +603,6 @@
                 padding: 12px 20px;
                 font-size: 0.9rem;
                 margin: 5px;
-            }
-
-            .contact-links {
-                flex-direction: column;
             }
 
             .pricing-card.featured {
@@ -677,6 +657,42 @@
             const randomDelay = Math.random() * 4000 + 8000;
             setTimeout(() => showRandomMessage(), randomDelay);
         }, 12000);
+
+        // Scroll reveal effect
+        const reveals = document.querySelectorAll('.reveal');
+
+        function reveal() {
+            reveals.forEach(element => {
+                const windowHeight = window.innerHeight;
+                const elementTop = element.getBoundingClientRect().top;
+                const elementVisible = 150;
+
+                if (elementTop < windowHeight - elementVisible) {
+                    element.classList.add('active');
+                }
+            });
+        }
+
+        window.addEventListener('scroll', reveal);
+        reveal();
+
+        // Add underline animation to section titles
+        document.querySelectorAll('section h2').forEach((title, index) => {
+            const words = title.textContent.split(' ');
+            title.textContent = '';
+            
+            words.forEach((word, wordIndex) => {
+                const span = document.createElement('span');
+                span.textContent = word + ' ';
+                
+                // Add underline to first meaningful word of each section
+                if (wordIndex === 0 || (index > 0 && wordIndex === 0)) {
+                    span.className = 'underline-animated';
+                }
+                
+                title.appendChild(span);
+            });
+        });
     </script>
 </head>
 <body>
@@ -705,18 +721,14 @@
             <div style="margin-top: 30px;">
                 <a href="https://wa.me/5493492610684?text=Hi%20KORE,%20I%27m%20interested%20in%20a%20market%20audit." 
                    class="cta-button cta-secondary">
-                    💬 Mariela (WhatsApp) →
-                </a>
-                <a href="https://wa.me/34655593805?text=Hi%20KORE,%20I%27m%20interested%20in%20a%20market%20audit." 
-                   class="cta-button cta-secondary">
-                    💬 Rossana (WhatsApp) →
+                    💬 WhatsApp Mariela →
                 </a>
             </div>
         </div>
     </section>
 
     <!-- Problem Section -->
-    <section class="problem" id="problem">
+    <section class="problem reveal" id="problem">
         <div class="container">
             <h2>Why Market Analysis Matters</h2>
             <div class="problem-grid">
@@ -737,7 +749,7 @@
     </section>
 
     <!-- Solution Section -->
-    <section class="solution" id="solution">
+    <section class="solution reveal" id="solution">
         <div class="container">
             <h2>Our Approach</h2>
             <div class="solution-grid">
@@ -758,7 +770,7 @@
     </section>
 
     <!-- Use Cases / Social Proof -->
-    <section class="use-cases">
+    <section class="use-cases reveal">
         <div class="container">
             <h2>How We Help</h2>
             <div class="use-cases-grid">
@@ -803,7 +815,7 @@
     </section>
 
     <!-- Pricing Section -->
-    <section class="pricing" id="pricing">
+    <section class="pricing reveal" id="pricing">
         <div class="container">
             <h2>Simple, Transparent Pricing</h2>
             <div class="pricing-grid">
@@ -867,7 +879,7 @@
     </section>
 
     <!-- Contact Section -->
-    <section class="contact" id="contact">
+    <section class="contact reveal" id="contact">
         <div class="container">
             <h2>Get In Touch</h2>
             <div class="contact-form">
@@ -878,28 +890,13 @@
                     <button type="submit">Send Message</button>
                 </form>
             </div>
-
-            <div class="contact-links">
-                <div class="contact-person">
-                    <strong>📱 Mariela Palmieri (Argentina)</strong>
-                    <a href="https://wa.me/5493492610684?text=Hi%20KORE,%20I%27m%20interested%20in%20a%20market%20audit.">
-                        WhatsApp Me
-                    </a>
-                </div>
-                <div class="contact-person">
-                    <strong>📱 Rossana (España)</strong>
-                    <a href="https://wa.me/34655593805?text=Hi%20KORE,%20I%27m%20interested%20in%20a%20market%20audit.">
-                        WhatsApp Rossana
-                    </a>
-                </div>
-            </div>
         </div>
     </section>
 
     <!-- Footer -->
     <footer>
         <div class="container">
-            <p>&copy; 2024 KORE. Market Analysis for Small Business.</p>
+            <p>&copy; 2024 KORE. Data Solution.</p>
             <p style="margin-top: 1rem; font-size: 0.9rem;">
                 <a href="#">Privacy Policy</a> | 
                 <a href="#">Terms of Service</a>
@@ -908,4 +905,3 @@
     </footer>
 </body>
 </html>
-
